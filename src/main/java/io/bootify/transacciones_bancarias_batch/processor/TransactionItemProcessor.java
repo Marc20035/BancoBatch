@@ -12,7 +12,6 @@ public class TransactionItemProcessor implements ItemProcessor<Transaction, Tran
         if (transaction.getAmount() < 0) {
             throw new IllegalArgumentException("Monto de transacción inválido: " + transaction.getAmount());
         }
-        // Aquí podrías añadir más lógica de procesamiento según sea necesario
         return transaction;
     }
 }
