@@ -1,0 +1,48 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout}">
+    <head>
+        <title>[[#{registrosFallos.list.headline}]]</title>
+    </head>
+    <body>
+        <div layout:fragment="content">
+            <div class="d-flex flex-wrap mb-4">
+                <h1 class="flex-grow-1">[[#{registrosFallos.list.headline}]]</h1>
+                <div>
+                    <a th:href="@{/registrosFalloss/add}" class="btn btn-primary ms-2">[[#{registrosFallos.list.createNew}]]</a>
+                </div>
+            </div>
+            <div th:if="${registrosFalloses.empty}">[[#{registrosFallos.list.empty}]]</div>
+            <div th:if="${!registrosFalloses.empty}" class="table-responsive">
+                <table class="table table-striped table-hover align-middle">
+                    <thead>
+                        <tr>
+                            <th scope="col">[[#{registrosFallos.id.label}]]</th>
+                            <th scope="col">[[#{registrosFallos.descripcion.label}]]</th>
+                            <th scope="col">[[#{registrosFallos.transaccion.label}]]</th>
+                            <th scope="col">[[#{registrosFallos.transaccionBancariaId.label}]]</th>
+                            <th><!-- --></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="registrosFallos : ${registrosFalloses}">
+                            <td>[[${registrosFallos.id}]]</td>
+                            <td>[[${registrosFallos.descripcion}]]</td>
+                            <td>[[${registrosFallos.transaccion}]]</td>
+                            <td>[[${registrosFallos.transaccionBancariaId}]]</td>
+                            <td>
+                                <div class="float-end text-nowrap">
+                                    <a th:href="@{/registrosFalloss/edit/{id}(id=${registrosFallos.id})}" class="btn btn-sm btn-secondary">[[#{registrosFallos.list.edit}]]</a>
+                                    <form th:action="@{/registrosFalloss/delete/{id}(id=${registrosFallos.id})}"
+                                            th:hx-confirm="#{delete.confirm}" method="post" class="d-inline">
+                                        <button type="submit" class="btn btn-sm btn-secondary">[[#{registrosFallos.list.delete}]]</button>
+                                    </form>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </body>
+</html>
